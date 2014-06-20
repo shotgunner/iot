@@ -5,49 +5,50 @@ var socket = io_client.connect( "10.10.10.221:8080" );
 	2 - https://www.npmjs.org/package/rpi-gpio
 	3 - http://nodejs.org/api/http.html#http_http_request_options_callback
 */
-//var gpio = require('rpi-gpio');
+var gpio = require('rpi-gpio');
 
 
 socket.emit('checkRDB', {
 	ID: 1 // => 2 is human || 1 is raspbery pi
 });
-//var led = 23 // pin number of led
+var led = 23 // pin number of led
 
 socket.on('changeStatus', function(message){
-//	gpio.setup(led, gpio.DIR_OUT, write(message.power));	
+	gpio.setup(led, gpio.DIR_OUT, write);	
 });
 
-//function write(power) {
-//    gpio.write(led, bool(power), function(err) {
-//        if (err) throw err;
-//        console.log('LED=>power changed');
-//    });
-//}
+function write() {
+    gpio.write(led, 0, function(err) {
+        if (err) throw err;
+        console.log('LED=>power changed');
+    });
+}
 
 //gpio.on('change', function(channel, value) {
 //	console.log('Channel ' + channel + ' value is now ' + value);
 //	gpio.setup(led, gpio.DIR_IN, readInput);
-
-//function readInput() {
-//    gpio.read(led, function(err, value) {
-//      console.log('The value is ' + value);
-//		if(bool(value))
-//		{
-//			socket.emit('statusMessage', {
-//				power: 1,
-//				ID: 2 //send to human :D
-//			});
-//		}
-//		else
-//		{
-//			socket.emit('statusMessage', {
-//				power: 0,
-//				ID: 2 //send to human :D
-//			});
-//		}
-//    });
 //}
-//});
+
+function readInput() {
+    gpio.read(led, function(err, value) 
+    {
+    	console.log('The value is ' + value);
+	if(bool(value))
+	{
+		socket.emit('statusMessage', {
+			power: 1,
+			ID: 2 //send to human :D
+		});
+	}
+	else
+	{
+		socket.emit('statusMessage', {
+			power: 0,
+			ID: 2 //send to human :D
+		});
+	}
+    });
+});
 
 
 

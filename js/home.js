@@ -1,4 +1,4 @@
-var socket = io.connect('10.10.10.221:8080');
+var socket = io.connect('127.0.0.1:8080');
 socket.emit('checkRDB', {
 	ID: 2 // => 2 is human || 1 is raspbery pi
 });
