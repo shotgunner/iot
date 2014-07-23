@@ -15,10 +15,15 @@ var client = createClient('6379' , '127.0.0.1', 'ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM
 
 
 io.sockets.on('connection', function (socket) {
-    console.log("vasl shod");
+    console.log("connect succesfully.");
     socket.on('statusMessage', function (message) {
-        console.log("I get message");
         console.log(message);
-        
+		client.get(message.ID, function(err, res){
+			io.sockets.socket(res).emit('changeStatus', message);
+		});
     });
+	socket.on('checkRDB', function(message){
+		client.set(message.ID, socket.id);
+		console.log("user is redis now with " + message.ID + " mysqlID and " + socket.id + " socketID :D");
+	});
 });
