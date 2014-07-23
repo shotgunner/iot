@@ -11,7 +11,7 @@ function createClient(port, host, pass) {
     return client;
 }
 
-var client = createClient('16379' , '127.13.101.2', 'ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5');
+var client = createClient('6379' , '127.0.0.1', 'ZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5');
 
 
 io.sockets.on('connection', function (socket) {
