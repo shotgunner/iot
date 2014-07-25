@@ -3,6 +3,7 @@ var socket = io_client.connect( "10.10.10.221:8080" );
 /* => after installation of node.js and rpi-gpio package with npm comment must remove <=
 	1 - http://joshondesign.com/2013/10/23/noderpi
 	2 - https://www.npmjs.org/package/rpi-gpio
+	3 - http://nodejs.org/api/http.html#http_http_request_options_callback
 */
 //var gpio = require('rpi-gpio');
 
